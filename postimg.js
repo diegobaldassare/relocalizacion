@@ -10,6 +10,12 @@ http.onreadystatechange = function () {
         const y = coordinates[2];
         const angle = response[1];
         draw(x, y, angle);
+    } else if (http.status === 404) {
+        document.getElementById("myAlert").style.visibility = "visible";
+        document.getElementById("alertText").innerHTML = "Could not relocate.</br>Please try with another photo";
+    } else if (http.status === 500) {
+        document.getElementById("myAlert").style.visibility = "visible";
+        document.getElementById("alertText").innerHTML = "The server is not working.</br>Please try again later";
     }
 };
 
