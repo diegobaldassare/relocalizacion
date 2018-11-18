@@ -12,10 +12,10 @@ http.onreadystatechange = function () {
         draw(x, y, angle);
     } else if (http.status === 404) {
         document.getElementById("myAlert").style.visibility = "visible";
-        document.getElementById("alertText").innerHTML = "Could not relocate.</br>Please try with another photo";
+        document.getElementById("alertText").innerHTML = "No se pudo relocalizar.</br>Por favor intente con otra foto";
     } else if (http.status === 500) {
         document.getElementById("myAlert").style.visibility = "visible";
-        document.getElementById("alertText").innerHTML = "The server is not working.</br>Please try again later";
+        document.getElementById("alertText").innerHTML = "El servidor no esta funcionando.</br>Por favor intente mas tarde";
     }
 };
 
