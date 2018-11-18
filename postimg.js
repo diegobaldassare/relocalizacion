@@ -1,5 +1,5 @@
 let http = new XMLHttpRequest();
-let url = "http://localhost:9000/image";
+let url = "http://cors-anywhere.herokuapp.com/http://localhost:9000/image";
 let img = undefined;
 
 http.onreadystatechange = function () {
