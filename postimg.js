@@ -20,14 +20,42 @@ http.onreadystatechange = function () {
 };
 
 function postImgB64(element) {
-    http.open("POST", url, true);
-    init();
-    const file = element.files[0];
-    let reader = new FileReader();
-    reader.onloadend = function () {
-        img = reader.result.split(',')[1];
-        const data = JSON.stringify({"uri": img});
-        http.send(data);
-    };
-    reader.readAsDataURL(file);
+    if (isAccessible) {
+        http.open("POST", url, true);
+        init();
+        const file = element.files[0];
+        let reader = new FileReader();
+        reader.onloadend = function () {
+            img = reader.result.split(',')[1];
+            const data = JSON.stringify({"uri": img});
+            http.send(data);
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+
+let isAccessible = null;
+
+function checkConnection() {
+    $.ajax({
+        url: url,
+        type: "get",
+        cache: false,
+        dataType: 'jsonp',
+        crossDomain : true,
+        asynchronous : false,
+        jsonpCallback: 'deadCode',
+        timeout : 1500, // set a timeout in milliseconds
+        complete : function(xhr, responseText, thrownError) {
+            if(xhr.status === "200") {
+                isAccessible = true;
+            }
+            else {
+                isAccessible = false;
+                document.getElementById("myAlert").style.visibility = "visible";
+                document.getElementById("alertText").innerHTML = "El servidor no esta funcionando.</br>Por favor intente mas tarde";
+            }
+        }
+    });
 }
